@@ -5,10 +5,10 @@ On February 20-22nd, mRelief (www.mrelief.com) will be part of a national event 
 We invite users all across the nation to push to this repo their food stamp pre-screeners for different states and target populations.  We also encourage meaningful collaboration with non-technical experts in the field engaged in food policy and advocacy.
 
 The four key files we want each user to push from their state:
-Code for prescreens (SMS Controller file or web forms)
-Seeds File of Eligibility Data
-Policy references to substantiate the questions asked
-Lists of local food pantries in your state listing name, address and phone number
+1) Code for prescreens (SMS Controller file or web forms)
+2) Seeds File of Eligibility Data
+3) Policy references to substantiate the questions asked
+4) Lists of local food pantries in your state listing name, address and phone number
 
 Our goal is to sustain this repository beyond the Hackathon in the efforts to provide SMS screening nationally.
 
@@ -24,9 +24,7 @@ Here are some clips from the mRelief Twilio Controller that shows how we decided
 
 
 class TwilioController < ApplicationController
-
   def text
-
     session["counter"] ||= 0
 
     if params[:Body].strip.downcase == "reset"
@@ -57,8 +55,6 @@ class TwilioController < ApplicationController
       end
     end
 
-# The rest of our logic for food stamps eligibility in Chicago goes here
-
      twiml = Twilio::TwiML::Response.new do |r|
          r.Message message
      end
@@ -75,19 +71,21 @@ end
 
 After asking, a few questions about age, household size and gross montly income, we do a lookup in our database of eligibility cutoffs to determine the user's eligibility status.
 
-age = session["age"].to_i
-snap_dependent_no = session["dependents"].to_i
-snap_gross_income = session["income"].to_i
- if age <= 59
-   snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
- else
-   snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
- end
+def text
+  age = session["age"].to_i
+  snap_dependent_no = session["dependents"].to_i
+  snap_gross_income = session["income"].to_i
+   if age <= 59
+     snap_eligibility = SnapEligibility.find_by({ :snap_dependent_no => snap_dependent_no })
+   else
+     snap_eligibility = SnapEligibilitySenior.find_by({ :snap_dependent_no => snap_dependent_no })
+   end
 
- if snap_gross_income < snap_eligibility.snap_gross_income
+  if snap_gross_income < snap_eligibility.snap_gross_income
     message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}. "
- else
+  else
    message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
+   end
  end
 
 
