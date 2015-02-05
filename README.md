@@ -1,11 +1,11 @@
 # mrelief_snap_screeners
 
-On February 20-22nd, mRelief (www.mrelief.com) will be part of a national event in partnership with Code For America to build upon our work as the first Social Services Delivery SMS application for screening eligibility in the US. mRelief is a midwest based web and SMS application led by an all-woman web development team that helps users check their eligibility for public assistance.
+On February 20-22nd, mRelief (www.mrelief.com) will be part of a national event in partnership with Code For America (CFA) to build upon our work as the first Social Services Delivery SMS application for screening eligibility in the US. mRelief is a midwest based web and SMS application led by an all-woman web development team that helps users check their eligibility for public assistance. CFA organizes a network of people dedicated to making government services simple, effective, and easy to use.
 
-We invite users all across the nation to push to this repo their food stamp pre-screeners for different states and target populations.  We also encourage meaningful collaboration with non-technical experts in the field engaged in food policy and advocacy.
+We invite users all across the nation to push their food stamp pre-screeners for different states and target populations to this repository.  We also encourage meaningful collaboration with non-technical experts in the field engaged in food policy and advocacy.
 
 The four key files we want each user to push from their state:
-1) Code for prescreens (SMS Controller file or web forms)
+1) Code for prescreens (SMS Controller file or web forms (preferably in Ruby))
 2) Seeds File of Eligibility Data
 3) Policy references to substantiate the questions asked
 4) Lists of local food pantries in your state listing name, address and phone number
@@ -54,6 +54,8 @@ class TwilioController < ApplicationController
          session["counter"] = 1
       end
     end
+
+    #the rest of our Twilio logic goes here
 
      twiml = Twilio::TwiML::Response.new do |r|
          r.Message message
