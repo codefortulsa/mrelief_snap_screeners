@@ -22,7 +22,7 @@ Here is a link to Twilio's documentation - https://www.twilio.com/docs/
 
 Here are some clips from the mRelief Twilio Controller that shows how we decided to structure our code.
 
-
+```ruby
 class TwilioController < ApplicationController
   def text
     session["counter"] ||= 0
@@ -67,10 +67,11 @@ class TwilioController < ApplicationController
      skip_before_action :verify_authenticity_token
 
 end
-
+```
 
 After asking, a few questions about age, household size and gross montly income, we do a lookup in our database of eligibility cutoffs to determine the user's eligibility status.
 
+```ruby
 def text
   age = session["age"].to_i
   snap_dependent_no = session["dependents"].to_i
@@ -87,11 +88,11 @@ def text
    message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
    end
  end
-
+```
 
 Here is an example of how we store the eligibility cutoffs in our seeds.rb file -
 
-
+```ruby
 s = SnapEligibility.new
 s.snap_dependent_no = 1
 s.snap_gross_income = 1265
@@ -106,6 +107,7 @@ s = SnapEligibility.new
 s.snap_dependent_no = 3
 s.snap_gross_income = 2144
 s.save
+```
 
 We found these number on the Illinois Department of Human Services website
 https://www.dhs.state.il.us/page.aspx?item=30357
