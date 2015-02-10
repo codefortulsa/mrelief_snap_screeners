@@ -14,8 +14,8 @@ Our goal is to sustain this repository beyond the Hackathon in the efforts to pr
 
 ## Challenge Overview
 
-  * This is challenge is designed for at least one policy expert and developer to work on together. However, the more the better!
-  * The challenge is designed to take 8 to 10 hours.  We estimate that it will take 4 hours to research food stamps eligibility and designed the questions for your target population.  The remainder of the time will be spend on developing the app.
+  * This challenge is designed for at least one policy expert and one developer to work on together. However, the more the better!
+  * The challenge is designed to take 8 to 10 hours.  We estimate that it will take 4 hours to research food stamps eligibility and design the questions for your target population.  The remainder of the time will be spent developing the app.
   * To set up the event, organize a group of policy experts and developers!
 
 
