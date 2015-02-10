@@ -18,11 +18,10 @@ Our goal is to sustain this repository beyond the Hackathon in the efforts to pr
   * The challenge is designed to take 8 to 10 hours.  We estimate that it will take 4 hours to research food stamps eligibility and design the questions for your target population.  The remainder of the time will be spent developing the app.
   * To set up the event, organize a group of policy experts and developers!
 
-
 ## Challenge Outline
 
 1. Before the event,
-  * Sign up and let us know who will be participating
+  * Sign up and let us know who will be participating - http://bit.ly/foodstampsusa
   * Connect with a local CBO partner that does SNAP application assistance. This will likely be your local Food Bank but many other organizations do this work, too. Learn how they currently screen clients for SNAP eligibility and if a SMS or online screener would be useful. Invite them to the event!
   * Here are some general guidelines on SNAP eligibility to review:  http://www.fns.usda.gov/snap/eligibility
 
@@ -121,7 +120,7 @@ def text
   if snap_gross_income < snap_eligibility.snap_gross_income
     message = "You may be in luck! You likely qualify for foodstamps. However make sure you accounted for your parents income, if you are still living in the same household.  To access your food stamps, go to #{@lafcenter.center} at #{@lafcenter.address} #{@lafcenter.city}, #{@lafcenter.zipcode.to_i }, #{@lafcenter.telephone}. "
   else
-   message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}. To check other programs, text 'menu'."
+   message = "Based on your household size and income, you likely do not qualify for food stamps. A food pantry near you is #{@food_pantry.name} - #{@food_pantry.street} #{@food_pantry.city} #{@food_pantry.state}, #{@food_pantry.zip} #{@food_pantry.phone}."
    end
  end
 ```
