@@ -44,7 +44,7 @@ Our goal is to sustain this repository beyond the Hackathon in the efforts to pr
   * Buy a twilio number, deploy to heroku, and test it out!
 
 4. Share it with us and the world! (screenshot + Tweet + PR + blog?)
-  * Add your code to this repo SNAP screeners across the nation - https://github.com/mRelief/mrelief_snap_screeners
+  * Push your GitHub branch back to https://github.com/mRelief/mrelief_snap_screener_example, so we can keep track of SMS screeners across the nation!
 
 
 ## Technical Overview of a SMS Pre-Screener
@@ -146,10 +146,5 @@ s.save
 
 We found these number on the Illinois Department of Human Services website -
 https://www.dhs.state.il.us/page.aspx?item=30357
-
-
-Here is our pre-screener codebase -
-https://github.com/mRelief/mrelief_snap_screener_example
-
 
 We look forward to seeing your solutions that are most relevant for your state and target population!
