@@ -1,0 +1,27 @@
+{
+  'Region':'Oklahoma',
+  'Questions':[
+    {
+      'US-Citizen':[
+      'Text':'Are you a U.S. Citizen',
+      'Type':'YesNo',
+      'Answer-Yes':'Social-Security-Registration',
+      'Answer-No':'Fail'
+        ],
+      'Social-Security-Registration':
+              [
+                'Text':'Do you have a Social Security Number?',
+                'Type':'YesNo',
+                'Answer-Yes':'Applicant-Children',
+                'Answer-No':'Fail'
+              ],
+      'Applicant-Children':
+              [
+                'Text':'Do you have any children',
+                'Type':'YesNo',
+                'Answer-Yes':'Number-Children',
+                'Answer-No':''
+              ]
+    }
+  ]
+}
