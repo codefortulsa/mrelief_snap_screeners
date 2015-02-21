@@ -7,11 +7,19 @@
 ## Team members
 
 *Carlos Moreno*
+
 *Kendal Werts*
+
 *Brendan Hill*
+
 *Patrick Forringer*
+
 *Ian Riley*
+
 *Todd Kirk*
+
 *Jerry Mizer*
+
 *Luci Dunham*
+
 *James Bullis*
