@@ -1,26 +1,76 @@
 {
-  'Region':'Oklahoma',
-  'Questions':[
+  "Region":"Oklahoma",
+  "Questions":[
     {
-      'US-Citizen':[
-      'Text':'Are you a U.S. Citizen',
-      'Type':'YesNo',
-      'Answer-Yes':'Social-Security-Registration',
-      'Answer-No':'Fail'
+      "US-Citizen":[
+      "Text":"Are you a U.S. Citizen",
+      "QuestionType":"YesNo",
+      "Answer-Yes":"Social-Security-Registration",
+      "Answer-No":"Fail"
         ],
-      'Social-Security-Registration':
+      "Social-Security-Registration":
               [
-                'Text':'Do you have a Social Security Number?',
-                'Type':'YesNo',
-                'Answer-Yes':'Applicant-Children',
-                'Answer-No':'Fail'
+                "Text":"Do you have a Social Security Number?",
+                "QuestionType":"YesNo",
+                "Answer-Yes":"Income",
+                "Answer-No":"Fail"
               ],
-      'Applicant-Children':
+      "Income":
               [
-                'Text':'Do you have any children',
-                'Type':'YesNo',
-                'Answer-Yes':'Number-Children',
-                'Answer-No':''
+                "Text":"How much is your monthly household income."
+                "QuestionType":"input",
+                "Answer-submit":"DependantCare"
+              ],
+      "DependantCare":
+              [
+                "Text":"How much do you spend per month on dependance care expenses and child support."
+                "QuestionType":"input",
+                "Answer-submit":"HouseholdResidents"
+              ],
+      "HouseholdResidents":
+              [
+                "Text":"How many people in your household",
+                "QuestionType":"input",
+                "Answer-submit":"Residence"
+              ],
+      "Residence":
+              [
+                "Text":"Do you have a perminant residence",
+                "QuestionType":"YesNo",
+                "Answer-Yes":"Rent/Morgage",
+                "Answer-No":"SSIS/SSID"
+              ],
+              "Rent/Morgage":
+              [
+                "Text":"How much do you spend per month for Rent/morgage.",
+                "QuestionType":"input",
+                "Answer-submit":"Utilities"
+              ],
+      "Utilities":
+              [
+                "Text":"How much do you spend per month for utilities.",
+                "QuestionType":"input",
+                "Answer-submit":"SSIS/SSID"
+              ],
+      "SSIS/SSID":
+              [
+                "Text":"Do you receive Social Security or Disability Income",
+                "QuestionType":"YesNo",
+                "Answer-Yes":"MedicalExpenses",
+                "Answer-No":"Applicant-Children"
+              ],
+      "MedicalExpenses":
+              [
+                "Text":"How much are your medical expenses",
+                "QuestionType":"income",
+                "Answer-submit":"Applicant-Children"
+              ], 
+      "Applicant-Children":
+              [
+                "Text":"Do you have any children",
+                "QuestionType":"YesNo",
+                "Answer-Yes":"",
+                "Answer-No":""
               ]
     }
   ]
