@@ -236,6 +236,7 @@
             "sections": [
                 "#qualify_section",
                 "#initial_information_section",
+				"#initial_information_section2",
                 "#question_section",
             ],
             "callbacks": {

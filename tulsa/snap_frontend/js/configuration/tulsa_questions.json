@@ -32,7 +32,7 @@
             "expected_answer": "yes",
             "next_pass": "HouseholdResidents",
 			"next_fail": "Children",
-            "unexpected_answer_is_failure":true
+            "unexpected_answer_is_failure":false
         },
         {
             "name": "Children",
