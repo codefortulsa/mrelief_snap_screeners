@@ -1,5 +1,13 @@
 var findEligibilityForSNAP = function (simple, people, income, depChildExpenses, shelter, utilities, medical, hasSSID) {
-	//determine whether the user is eligible for food stamps based on inputs. 
+	// determine whether the user is eligible for food stamps based on inputs. 
+	// simple is a bollean. true indicates that were are performing the simplified calculation estimated toward the beginning of the survey
+	// people is an integer and the number of people in household
+	// income is total income of household
+	// depChildExpenses is total dependant or child care expenses including child support
+	// shelter is amount in shelter expenses
+	// utilities is amount in utilities expenses
+	// medical is amount in medical expenses
+	// hasSSID is a boolean that indicates whether the user has an individual in their household that receives SSI or SSD
 
 	var eligibility 
 	if (simple) {
@@ -66,6 +74,9 @@ var findSizeDeduct = function (people) {
 }
 
 var determineEligibilty = function (income, shelter, utilities, depChildExpenses, people, medical, hasSSID) {
+	// equation to determine eligibility for SNAP. depending on whether the user has a household member who
+	// recieves SSI or SSD.
+	
 	var sizeDeduct = findSizeDeduct(people);
 
 	var netIncome = income - shelter - utilities - depChildExpenses - 0.2*income - sizeDeduct - medical;
@@ -80,10 +91,10 @@ var determineEligibilty = function (income, shelter, utilities, depChildExpenses
 	}
 
 	if (netIncome <= (baseAmount + people*perPerson)) {
-		return 1;
+		return true;
 	}
 	else {
-		return 0;
+		return false;
 	}
 
 }
