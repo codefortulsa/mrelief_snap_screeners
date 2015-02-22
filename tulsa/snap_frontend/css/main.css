@@ -13,9 +13,8 @@ section {
 	margin-bottom: 50px;
 }
 
-.opening-logo {
-	width: 425px;
-	height: 225px;
+.container {
+	width: 960px;
 }
 
 .temp-hidden {
