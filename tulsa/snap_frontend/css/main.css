@@ -13,24 +13,6 @@ section {
 	margin-bottom: 50px;
 }
 
-
-.navbar-back {
-	height: 50px;
-}
-
-.navbar-back p {
-	padding-top: 15px;
-}
-
-.navbar-back a {
-	color: #ffffff;
-	text-decoration: none;
-}
-
-.navbar-back a:hover {
-	text-decoration: underline;
-}
-
 .opening-logo {
 	width: 425px;
 	height: 225px;

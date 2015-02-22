@@ -28,8 +28,8 @@
 
 		<!-- The following is a link that will be dynamically generated to return to the last section. This should only appear after the first step of eligibility (i.e. Are you a citizen?) -->
 
-        <div class="navbar-right navbar-back">
-        	<a href="#" id="back_button" class="btn btn-warning navbar-btn temp-hidden">Oops... Go Back</a>
+        <div class="navbar-right temp-hidden" id="back_button_container">
+		<a href="#" id="back_button" class="btn btn-warning navbar-btn">Oops... Go Back</a>
         </div>
 
       </div>
@@ -44,19 +44,20 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
 
           <div class="container">
-		  
+
           	<div class="opening-logo">
             	<img src="img/snap_logo.png" border="0" />
             </div>
-            
+
             <div class="opening-text">
-               <h2>Are you elibible for SNAP?</h2>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            
+            <h2>Are you eligible for SNAP benefits?</h2>
+            <p>We're about to find out.</p>
+			<p>Ultimately, your eligibility is up to the Department of Human Services.</p>
+			<p>This app is not officially a part of DHS.</p>
             <p>
               <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Get Started &raquo;</a>
             </p>
-            
+
             </div>
 
           </div>
@@ -72,8 +73,22 @@
     <!--These Sections Represent the Initial Information-->
     <section id="initial_information_section" class="temp-hidden">
     	<div class="container">
-        <h2>Initial Information</h2>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <h2>What we’re gonna do…</h2>
+        <p>In the next few screens we will ask a handful of questions about your income and your expenses. In the end, this will be a good indicator of whether or not you’re eligible for SNAP benefits.</p>
+		<p>However, the ultimate decision is up to DHS.</p>
+        <p>If you need to go back and correct something at any point, click the “OOPS!” button.</p>
+        <p>
+          <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Continue &raquo;</a>
+        </p>
+      </div>
+    </section>
+    
+    <section id="initial_information_section2" class="temp-hidden">
+    	<div class="container">
+        <h2>What you’re gonna need…</h2>
+        <p>Before we begin, you’re gonna need to be ready with information about any income sources you may have, whether from a regular job, child support, or any other source.</p>
+        <p>We'll also need to know how much you pay for utilities, rent, child care or any other expenses you might have.</p>
+		<p>So it'd be a good idea to grab whatever paperwork you have on that (bills, lease, pay stubs, etc.).</p>
         <p>
           <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Continue &raquo;</a>
         </p>
@@ -103,15 +118,44 @@
 
     <!-- End Eligibility Questions-->
 
+
+<!--************************
+    			FAILURE
+    ****************************-->
+
+<script id="unqualified_person_citizen" type="text/underscore_template">
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time. Citizen.</h2><br />
+    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+</script>
+
+<script id="unqualified_person_kids_ssn" type="text/underscore_template">
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time. Kids & SSN </h2><br />
+    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+</script>
+
+<script id="unqualified_person_mailing" type="text/underscore_template">
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time. Mailing Address</h2><br />
+    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+</script>
+
 <script id="unqualified_person" type="text/underscore_template">
     <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2><br />
     <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
 </script>
 
+
+<!--************************
+    			SUCESS
+    ****************************-->
+
 <script id="qualified_person" type="text/underscore_template">
     <h2 class="unqualified_message_text">You may qualify for snap benefits.</h2><br />
     <a class="snap_application_info_link" href="http://www.okdhs.org/programsandservices/snap/docs/snaphow.htm">For more information click here</a>
 </script>
+
+<!--************************
+    			SUCESS
+    ****************************-->
 
 <script id="yes_no_input" type="text/underscore_template">
 <div>
@@ -144,33 +188,6 @@
   </div>
 </script>
 
-    <!--************************
-    			FAILURE
-    ****************************-->
-
-    <!--These Sections Represent the Failure Responses-->
-    <section id="fail_section" class="temp-hidden">
-    	<div class="container">
-        <h2>Failure</h2>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      </div>
-    </section>
-
-    <!-- End Failure Responses-->
-
-
-    <!--************************
-    			SUCESS
-    ****************************-->
-
-    <!--These Sections Represent the Success Section-->
-    <section id="success_section" class="temp-hidden">
-    	<div class="container">
-        <h2>Success</h2>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        </div>
-    </section>
-    <!-- End Success Section-->
 
     <footer>
     	<div class="container">

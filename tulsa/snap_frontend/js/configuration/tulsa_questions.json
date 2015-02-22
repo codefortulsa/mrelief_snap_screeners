@@ -2,18 +2,30 @@
     "region": "Oklahoma",
     "evaluation_properties":[
         {
-            "id":"income_deduction_per_expense",
-            "value":""
+            "id": "income_deduction_per_expense",
+            "value": ""
         }
     ],
     "non_question_responses":[
         {
-            "name":"unqualified_person",
-            "template_type":"unqualified_person"
+            "name": "unqualified_person",
+            "template_type": "unqualified_person"
+        },
+		{
+            "name":"unqualified_person_citizen",
+            "template_type":"unqualified_person_citizen"
+        },
+		{
+            "name":"unqualified_person_kids_ssn",
+            "template_type":"unqualified_person_kids_ssn"
+        },
+		{
+            "name":"unqualified_person_mailing",
+            "template_type":"unqualified_person_mailing"
         },
         {
-            "name":"qualified_person",
-            "template_type":"qualified_person"
+            "name": "qualified_person",
+            "template_type": "qualified_person"
         }
     ],
     "questions": [
@@ -23,7 +35,7 @@
             "template_type": "YesNoButton",
             "expected_answer": "yes",
             "next_pass": "Social-Security-Registration",
-            "unexpected_answer_is_failure":true
+            "unexpected_answer_is_failure": true
         },
         {
             "name": "Social-Security-Registration",
@@ -32,7 +44,7 @@
             "expected_answer": "yes",
             "next_pass": "HouseholdResidents",
 			"next_fail": "Children",
-            "unexpected_answer_is_failure":true
+            "unexpected_answer_is_failure": true
         },
         {
             "name": "Children",
@@ -40,7 +52,7 @@
             "template_type": "YesNoButton",
             "expected_answer": "yes",
             "next_pass": "HouseholdResidents",
-            "unexpected_answer_is_failure":true
+            "unexpected_answer_is_failure": true
         },
 		{
             "name": "HouseholdResidents",
