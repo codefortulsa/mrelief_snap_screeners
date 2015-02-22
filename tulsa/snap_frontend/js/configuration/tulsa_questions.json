@@ -11,6 +11,18 @@
             "name":"unqualified_person",
             "template_type":"unqualified_person"
         },
+		{
+            "name":"unqualified_person_citizen",
+            "template_type":"unqualified_person_citizen"
+        },
+		{
+            "name":"unqualified_person_kids_ssn",
+            "template_type":"unqualified_person_kids_ssn"
+        },
+		{
+            "name":"unqualified_person_mailing",
+            "template_type":"unqualified_person_mailing"
+        },
         {
             "name":"qualified_person",
             "template_type":"qualified_person"
