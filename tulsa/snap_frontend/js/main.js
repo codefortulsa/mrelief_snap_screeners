@@ -27,7 +27,7 @@
         this.history = [];
         this.failed = false;
         this.is_complete = false;
-        this.questions_count=questions.length;
+        this.questions_count = questions.length;
     }
 
     QuestionController.prototype.is_survey_failed = function(){
@@ -93,7 +93,7 @@
         this.failed = !findEligibilityForSNAPWithAnswers(this.answers);
         this.update_progress();
         this.render();
-    }
+    };
 
     QuestionController.prototype.update_progress = function()
     {
@@ -102,9 +102,9 @@
             percentDone = 100;
 
         $("#progress_bar_element").css('width', percentDone   + '%' );
-    }
+    };
 
-    QuestionController.prototype.configure_template = function(controller, current_component, target_template)
+    QuestionController.prototype.configure_template = function(current_component, target_template)
     {
         /*The Idea here is to be able to configure each template based upon the question's configuration and not just the template.
         * So if we have a YesNoButton and the expected answer is yes, then the class of the clicked button must be yes-btn
@@ -112,6 +112,8 @@
         * stay in sync.
         *
         * In my opinon the current questions.json file is more appropriate for a dynamic survey, but that is just my opinion*/
+
+        controller = this;
 
         switch (current_component.template_type)
         {
@@ -133,12 +135,12 @@
                     }
                     controller.process_template(current_component, !controller.failed);
 
-
                     return false;
                 });
                 break;
             case 'input':
                 current_component.next = current_component.next_pass;
+                // TODO: make dry
                 if(current_component.next_pass =='evaluate_eligibility')
                 {
                     target_template.on('click', '.btn-next', function(e){
@@ -147,6 +149,7 @@
                         val_el = val[0];
                         if (val_el.checkValidity && !val_el.checkValidity()) {
                             // html5 validate, if a special type is specified
+                            // TODO: Put an alert
                             return false;
                         }
                         controller.evaluate_eligibility();
@@ -160,6 +163,7 @@
                         val_el = val[0];
                         if (val_el.checkValidity && !val_el.checkValidity()) {
                             // html5 validate, if a special type is specified
+                            // TODO: Put an alert
                             return false;
                         }
                         controller.process_template(current_component, val.val());
@@ -168,27 +172,27 @@
                 }
                 break;
         }
-    }
+    };
 
     QuestionController.prototype.render_current = function () {
         var self, current, current_value;
         self = this;
         current = this.get_current();
         current_value = this.get_value(current.name);
-        context = _.defaults({
+
+        context = _.defaults(current, {
             input_type: 'text',
             value: current_value
-        }, current);
+        });
 
-       var template = this.create_template(current.template_type, context);
+        var template = this.create_template(current.template_type, context);
         // terrible but wat
         // handle yes/no actions
-        this.configure_template(self, current, template);
-
+        this.configure_template(current, template);
 
         return template;
-
     };
+
     QuestionController.prototype.render = function () {
         $(this.options.render_div).html(this.render_current());
 

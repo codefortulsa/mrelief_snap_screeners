@@ -46,12 +46,14 @@
             "name": "HouseholdResidents",
             "text": "How many people live in your household?",
             "template_type": "input",
+            "input_type": "number",
             "next_pass": "DependantCare"
         },
         {
             "name": "DependantCare",
             "text": "How much do you spend per month on dependent care expenses and child support.",
             "template_type": "input",
+            "input_type": "number",
             "next_pass": "Income"
         },
         {
@@ -73,18 +75,21 @@
             "name": "ShelterCost",
             "text": "How much do you spend per month for your Rent or Mortgage?",
             "template_type": "input",
+            "input_type": "number",
             "next_pass": "Utilities"
         },
         {
             "name": "Utilities",
             "text": "How much do you spend per month for utilities?",
             "template_type": "input",
+            "input_type": "number",
             "next_pass": "MedicalExpenses"
         },
         {
             "name": "MedicalExpenses",
             "text": "How much are your medical expenses?",
             "template_type": "input",
+            "input_type": "number",
             "next_pass": "evaluate_eligibility"
         }
     ]
