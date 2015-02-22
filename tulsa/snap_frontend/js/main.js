@@ -99,13 +99,6 @@
 
     QuestionController.prototype.configure_template = function(current_component, target_template)
     {
-        /*The Idea here is to be able to configure each template based upon the question's configuration and not just the template.
-        * So if we have a YesNoButton and the expected answer is yes, then the class of the clicked button must be yes-btn
-        * This same scenario will work for other groups of buttons (Yes, No, Maybe) as long as the classes on the buttons in the template
-        * stay in sync.
-        *
-        * In my opinon the current questions.json file is more appropriate for a dynamic survey, but that is just my opinion*/
-
         controller = this;
 
         switch (current_component.template_type)
