@@ -13,8 +13,7 @@
             options = {};
         }
         this.options = _.defaults(options, {
-            render_div: "#question_field",
-            back_button: "#back_btn"
+            render_div: "#question_field"
         });
         this.questions = questions;
         this.non_question_responses = non_question_responses;
@@ -34,15 +33,34 @@
         return _.findWhere(this.questions, {name: name});
     };
 
+    QuestionController.prototype.index_of_question = function (question) {
+        if (typeof question == 'string') {
+            question = this.get_question(question);
+        }
+        return _.indexOf(this.questions, question);
+    };
+
     QuestionController.prototype.navigate = function (current_question) {
         // get either the next question when succesfully validated
         // or the actual next step
+
        if(!this.is_survey_failed()) {
-           next_view_name = current_question.next;
-           this.index = _.indexOf(this.questions, this.get_question(next_view_name));
+           this.history.push(current_question.name);
+           next_question_name = current_question.next;
+           this.index = this.index_of_question(next_question_name);
        }
     };
 
+    QuestionController.prototype.back = function () {
+        previous_question = this.history.pop();
+        if (previous_question) {
+            this.failed = false;
+            this.is_complete = false;
+            this.index = this.index_of_question(previous_question);
+            this.update_progress();
+            this.render();
+        }
+    };
 
     QuestionController.prototype.get_current = function () {
         /*This section could grow to include other responses or could go away.*/
@@ -51,7 +69,7 @@
             return _.findWhere(this.non_question_responses, {name: 'unqualified_person'});
         }
         if(this.is_complete)
-            return _.findWhere(this.non_question_responses, {name:'qualified_person'});
+            return _.findWhere(this.non_question_responses, {name: 'qualified_person'});
 
         return this.questions[this.index];
     };
@@ -134,7 +152,7 @@
                 var val = target_template.find('.input_value');
                 var val_el = val[0];
 
-                var submit_field = function(e) {
+                var submit_field = _.debounce(function(e) {
                     e.preventDefault();
                     if (val_el.checkValidity && !val_el.checkValidity()) {
                         // html5 validate, if a special type is specified
@@ -153,7 +171,7 @@
                         controller.process_template(current_component);
                     }
                     return false;
-                };
+                }, 200);
 
                 val.keypress(function(e) {
                     if(e.which == 13) {
@@ -198,6 +216,11 @@
             w.questions = new QuestionController(resp.questions, resp.non_question_responses, {});
             w.questions.render();
             region = resp.region;
+            // Show back button
+            $('#back_button_container').show().on('click', '#back_button', function(e) {
+                e.preventDefault();
+                w.questions.back();
+            });
         }).fail(function(resp, textStatus, error) {
             console.error("failed to get questions JSON" + error);
         });
