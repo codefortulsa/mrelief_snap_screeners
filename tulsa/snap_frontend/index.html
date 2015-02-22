@@ -80,22 +80,14 @@
     	<div class="container">
             <div id="question_field">
 
-            </div>
+            </div><br/><br/>
         		<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-    <span class="sr-only">30% Complete</span>
+  <div id="progress_bar_element" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+    <span class="sr-only">10% Complete</span>
   </div>
-</div>
-            <h2>Eligibilty Yes/No <!--Insert The Question Here--></h2>
+                    </div>
+            </div>
 
-
-<div class="btn-group btn-group-lg">
-  <button type="button" class="btn btn-success">Yes</button>
-  <button type="button" class="btn btn-danger">No</button>
-</div>
-
-
-        </div>
     </section>
 
     <section id="">
@@ -113,24 +105,29 @@
 
     <!-- End Eligibility Questions-->
 <script id="unqualified_person" type="text/underscore_template">
-    <span class="unqualified_message_text">You may not qualify for snap benefits at this time.</span><br />
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2><br />
     <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
 </script>
 
+<script id="qualified_person" type="text/underscore_template">
+    <h2 class="unqualified_message_text">You may qualify for snap benefits.</h2><br />
+    <a class="snap_application_info_link" href="http://www.okdhs.org/programsandservices/snap/docs/snaphow.htm">For more information click here</a>
+</script>
+
 <script id="yes_no_input" type="text/underscore_template">
-  <label><%= text %></label>
-  <div class="btn-group">
-    <a href="#" class="btn btn-primary yes-btn action <% if(value===true) { print('active') } %>">Yes</a>
-    <a href="#" class="btn btn-primary no-btn action <% if(value===false) { print('active') } %>">No</a>
+  <label><%= text %></label><br />
+  <div class="btn-group btn-group-lg">
+    <a href="#" class="btn btn-primary btn-success yes-btn action <% if(value===true) { print('active') } %>">Yes</a>
+    <a href="#" class="btn btn-primary btn-danger no-btn action <% if(value===false) { print('active') } %>">No</a>
   </div>
 </script>
 
 
 <script id="default_input" type="text/underscore_template">
 <div>
-  <label><%= text %></label>
-  <input type="<%= input_type %>" class="input_value" value="<%= value %>" required >
-  <a href="#" class="btn btn-primary btn-next">Next</a>
+  <label><%= text %></label><br/>
+  <input type="<%= input_type %>" class="input_value" value="<%= value %>" required ><br/>
+  <a href="#" class="btn btn-primary btn-next" style="margin-top: 10px">Next</a>
 </div>
 </script>
 
@@ -195,6 +192,7 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/underscore.js"></script>
 
+        <script src="../algorithm/algorithm.js"></script>
         <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

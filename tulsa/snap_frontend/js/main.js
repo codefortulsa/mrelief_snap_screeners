@@ -7,7 +7,8 @@
     var templates = {
         YesNoButton: _.template($('#yes_no_input').html()),
         input: _.template($('#default_input').html()),
-        unqualified_person: _.template($('#unqualified_person').html())
+        unqualified_person: _.template($('#unqualified_person').html()),
+        qualified_person: _.template($('#qualified_person').html())
 
     };
 
@@ -25,6 +26,8 @@
         this.index = 0;
         this.history = [];
         this.failed = false;
+        this.is_complete = false;
+        this.questions_count=questions.length;
     }
 
     QuestionController.prototype.is_survey_failed = function(){
@@ -39,27 +42,20 @@
         // get either the next question when succesfully validated
         // or the actual next step
        if(!this.is_survey_failed()) {
-           next_view_name = current_question.next_pass;
+           next_view_name = current_question.next;
            this.index = _.indexOf(this.questions, this.get_question(next_view_name));
        }
     };
 
 
-    QuestionController.prototype.next_question = function (current_question) {
-        // get either the next question when succesfully validated
-        // or the actual next step
-        next_name = current_question.next || current_question.next_question_pass;
-        this.index = _.indexOf(this.questions, this.get_question(next_name));
-    };
-
-    QuestionController.prototype.fail = function () {
-        throw Error('wat');
-    };
-
     QuestionController.prototype.get_current = function () {
         /*This section could grow to include other responses or could go away.*/
         if(this.failed)
+        {
             return _.findWhere(this.non_question_responses, {name: 'unqualified_person'});
+        }
+        if(this.is_complete)
+            return _.findWhere(this.non_question_responses, {name:'qualified_person'});
 
         return this.questions[this.index];
     };
@@ -81,6 +77,7 @@
     {
         this.store_value(current_question.name, store_value);
         this.navigate(current_question);
+        this.update_progress();
         this.render();
     };
 
@@ -89,6 +86,23 @@
         var template_with_context = $(template(context_object));
         return template_with_context;
     };
+
+    QuestionController.prototype.evaluate_eligibility = function()
+    {
+        this.is_complete = true;
+        this.failed = !findEligibilityForSNAPWithAnswers(this.answers);
+        this.update_progress();
+        this.render();
+    }
+
+    QuestionController.prototype.update_progress = function()
+    {
+        var percentDone = ((this.index) / this.questions_count) * 100;
+        if(this.is_complete || this.failed)
+            percentDone = 100;
+
+        $("#progress_bar_element").css('width', percentDone   + '%' );
+    }
 
     QuestionController.prototype.configure_template = function(controller, current_component, target_template)
     {
@@ -104,24 +118,54 @@
             case 'YesNoButton':
                 target_template.on('click', '.action', function(e){
                     e.preventDefault();
-                    var correct_answer_button_type = current_component.expected_answer + '-btn';
-                    controller.failed = !$(e.currentTarget).hasClass(correct_answer_button_type);
+                    if(current_component.unexpected_answer_is_failure)
+                    {
+                        var correct_answer_button_type = current_component.expected_answer + '-btn';
+                        controller.failed = !$(e.currentTarget).hasClass(correct_answer_button_type);
+                    }
+                    if(current_component.expected_answer == 'yes')
+                    {
+                        current_component.next = current_component.next_pass;
+                    }
+                    else
+                    {
+                        current_component.next = current_component.next_fail;
+                    }
                     controller.process_template(current_component, !controller.failed);
+
+
                     return false;
                 });
                 break;
             case 'input':
-                target_template.on('click', '.btn-next', function(e){
-                    e.preventDefault();
-                    var val = tmpl.find('.input_value');
-                    val_el = val[0];
-                    if (val_el.checkValidity && !val_el.checkValidity()) {
-                        // html5 validate, if a special type is specified
+                current_component.next = current_component.next_pass;
+                if(current_component.next_pass =='evaluate_eligibility')
+                {
+                    target_template.on('click', '.btn-next', function(e){
+                        e.preventDefault();
+                        var val = target_template.find('.input_value');
+                        val_el = val[0];
+                        if (val_el.checkValidity && !val_el.checkValidity()) {
+                            // html5 validate, if a special type is specified
+                            return false;
+                        }
+                        controller.evaluate_eligibility();
                         return false;
-                    }
-                    self.process_template(current_component, val.val());
-                    return false;
-                });
+                    });
+                }
+                else {
+                    target_template.on('click', '.btn-next', function (e) {
+                        e.preventDefault();
+                        var val = target_template.find('.input_value');
+                        val_el = val[0];
+                        if (val_el.checkValidity && !val_el.checkValidity()) {
+                            // html5 validate, if a special type is specified
+                            return false;
+                        }
+                        controller.process_template(current_component, val.val());
+                        return false;
+                    });
+                }
                 break;
         }
     }
@@ -147,6 +191,7 @@
     };
     QuestionController.prototype.render = function () {
         $(this.options.render_div).html(this.render_current());
+
     };
 
     var region = null;
