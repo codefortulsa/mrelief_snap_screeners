@@ -4,13 +4,13 @@
    Author's custom styles
    ========================================================================== */
 body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
 
 section {
-		margin-top: 50px;
-		margin-bottom: 50px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 
@@ -36,17 +36,7 @@ section {
 	height: 225px;
 }
 
-
-
 .temp-hidden {
-    /* Less important than bs .hide */
+    /* Less important than bs .hide or .hidden */
     display: none;
 }
-	text-decoration: { underline;	
-}
-
-
-
-
-
-
