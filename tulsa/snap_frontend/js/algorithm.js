@@ -1,13 +1,13 @@
 var findEligibilityForSNAPWithAnswers = function(answersCollection)
 {
 
-	 var people = answersCollection.HouseholdResidents;
-	 var depChildExpenses= answersCollection.DependantCare;
-	 var income = answersCollection.Income;
+	 var people = parseInt(answersCollection.HouseholdResidents || 0);
+	 var depChildExpenses= parseInt(answersCollection.DependantCare || 0);
+	 var income = parseInt(answersCollection.Income || 0);
 	 var hasSSID = answersCollection.HasSSDI;
-	 var shelter = answersCollection.ShelterCost;
-	 var utilities = answersCollection.Utilities;
-	 var medical = answersCollection.MedicalExpenses;
+	 var shelter = parseInt(answersCollection.ShelterCost || 0);
+	 var utilities = parseInt(answersCollection.Utilities || 0);
+	 var medical = parseInt(answersCollection.MedicalExpenses || 0);
 
 
 	return findEligibilityForSNAP(false, people, income, depChildExpenses, shelter, utilities, medical, hasSSID);

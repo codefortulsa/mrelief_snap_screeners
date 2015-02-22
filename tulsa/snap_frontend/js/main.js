@@ -69,15 +69,13 @@
         }
     };
 
-    QuestionController.prototype.process_template = function(current_question, store_value)
-    {
-        this.store_value(current_question.name, store_value);
+    QuestionController.prototype.process_template = function(current_question) {
         this.navigate(current_question);
         this.update_progress();
         this.render();
     };
 
-    QuestionController.prototype.create_template = function(template_type, context_object){
+    QuestionController.prototype.create_template = function(template_type, context_object) {
         var template = templates[template_type];
         return $(template(context_object));
     };
@@ -115,56 +113,58 @@
             case 'YesNoButton':
                 target_template.on('click', '.action', function(e){
                     e.preventDefault();
-                    if(current_component.unexpected_answer_is_failure)
-                    {
+                    if(current_component.unexpected_answer_is_failure) {
                         var correct_answer_button_type = current_component.expected_answer + '-btn';
                         controller.failed = !$(e.currentTarget).hasClass(correct_answer_button_type);
                     }
-                    if(current_component.expected_answer == 'yes')
-                    {
+                    if(current_component.expected_answer == 'yes') {
                         current_component.next = current_component.next_pass;
-                    }
-                    else
-                    {
+                    } else {
                         current_component.next = current_component.next_fail;
                     }
-                    controller.process_template(current_component, !controller.failed);
+
+                    controller.store_value(current_component.name, !controller.failed);
+                    controller.process_template(current_component);
 
                     return false;
                 });
                 break;
             case 'input':
                 current_component.next = current_component.next_pass;
-                // TODO: make dry
-                if(current_component.next_pass =='evaluate_eligibility')
-                {
-                    target_template.on('click', '.btn-next', function(e){
-                        e.preventDefault();
-                        var val = target_template.find('.input_value');
-                        val_el = val[0];
-                        if (val_el.checkValidity && !val_el.checkValidity()) {
-                            // html5 validate, if a special type is specified
-                            // TODO: Put an alert
-                            return false;
-                        }
+                var val = target_template.find('.input_value');
+                var val_el = val[0];
+
+                var submit_field = function(e) {
+                    e.preventDefault();
+                    if (val_el.checkValidity && !val_el.checkValidity()) {
+                        // html5 validate, if a special type is specified
+                        // TODO: Put an alert
+                        alert('Please enter a valid value.');
+                        return false;
+                    }
+                    input_value = val.val();
+                    if (current_component.input_type == 'number') {
+                        input_value = parseInt(input_value);
+                    }
+                    controller.store_value(current_component.name, input_value);
+                    if(current_component.next_pass =='evaluate_eligibility') {
                         controller.evaluate_eligibility();
-                        return false;
-                    });
-                }
-                else {
-                    target_template.on('click', '.btn-next', function (e) {
-                        e.preventDefault();
-                        var val = target_template.find('.input_value');
-                        val_el = val[0];
-                        if (val_el.checkValidity && !val_el.checkValidity()) {
-                            // html5 validate, if a special type is specified
-                            // TODO: Put an alert
-                            return false;
-                        }
-                        controller.process_template(current_component, val.val());
-                        return false;
-                    });
-                }
+                    } else {
+                        controller.process_template(current_component);
+                    }
+                    return false;
+                };
+
+                val.keypress(function(e) {
+                    if(e.which == 13) {
+                        return submit_field(e);
+                    }
+                });
+
+                target_template.on('click', '.btn-next', function(e){
+                    return submit_field(e);
+                });
+
                 break;
         }
     };
@@ -194,7 +194,7 @@
 
     function start_questions(region){
         // load and start up questions handler
-        $.getJSON('../configuration/' + region + '_questions.json').done(function(resp) {
+        $.getJSON('./js/configuration/' + region + '_questions.json').done(function(resp) {
             w.questions = new QuestionController(resp.questions, resp.non_question_responses, {});
             w.questions.render();
             region = resp.region;
@@ -215,11 +215,11 @@
         this.index++;
         var next_section_id = this.sections[this.index];
         var next_section = $(next_section_id);
-        current_section.slideUp(500);
-        next_section.slideDown(500);
         if (typeof this.callbacks[next_section_id] == 'function') {
            this.callbacks[next_section_id].call(this, current_section, next_section);
         }
+        current_section.slideUp(500);
+        next_section.slideDown(500);
     };
 
     Sections.prototype.setup_button_handler = function(){
