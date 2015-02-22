@@ -1,13 +1,13 @@
 var findEligibilityForSNAPWithAnswers = function(answersCollection)
 {
 
-	 var people = answersCollection["HouseholdResidents"];
-	 var depChildExpenses= answersCollection["DependantCare"];
-	 var income = answersCollection["Income"];
-	 var hasSSID = answersCollection["HasSSDI"];
-	 var shelter = answersCollection["ShelterCost"];
-	 var utilities = answersCollection["Utilities"];
-	 var medical = answersCollection["MedicalExpenses"];
+	 var people = answersCollection.HouseholdResidents;
+	 var depChildExpenses= answersCollection.DependantCare;
+	 var income = answersCollection.Income;
+	 var hasSSID = answersCollection.HasSSDI;
+	 var shelter = answersCollection.ShelterCost;
+	 var utilities = answersCollection.Utilities;
+	 var medical = answersCollection.MedicalExpenses;
 
 
 	return findEligibilityForSNAP(false, people, income, depChildExpenses, shelter, utilities, medical, hasSSID);
@@ -16,7 +16,7 @@ var findEligibilityForSNAPWithAnswers = function(answersCollection)
 
 
 var findEligibilityForSNAP = function (simple, people, income, depChildExpenses, shelter, utilities, medical, hasSSID) {
-	// determine whether the user is eligible for food stamps based on inputs. 
+	// determine whether the user is eligible for food stamps based on inputs.
 	// simple is a bollean. true indicates that were are performing the simplified calculation estimated toward the beginning of the survey
 	// people is an integer and the number of people in household
 	// income is total income of household
@@ -26,7 +26,7 @@ var findEligibilityForSNAP = function (simple, people, income, depChildExpenses,
 	// medical is amount in medical expenses
 	// hasSSID is a boolean that indicates whether the user has an individual in their household that receives SSI or SSD
 
-	var eligibility 
+	var eligibility;
 	if (simple) {
 	//simple is for the quick estimation on income at the top of the app
 		shelter = 835;
@@ -52,11 +52,11 @@ var findEligibilityForSNAP = function (simple, people, income, depChildExpenses,
 	//and there is not limit on the shelter deduction.
 		if (medical > 35) {
 			medical -= 35;
-		} 
+		}
 		else {
 			medical = 0;
 		}
-	
+
 		eligibility = determineEligibilty(income, shelter, utilities, depChildExpenses, people, medical, hasSSID);
 		return eligibility;
 	}
@@ -83,7 +83,7 @@ var findSizeDeduct = function (people) {
 	}
 	else if (people == 5) {
 		sizeDeduct = 193;
-	} 
+	}
 	else if (people > 5) {
 		sizeDeduct = 221;
 	}
@@ -93,7 +93,7 @@ var findSizeDeduct = function (people) {
 var determineEligibilty = function (income, shelter, utilities, depChildExpenses, people, medical, hasSSID) {
 	// equation to determine eligibility for SNAP. depending on whether the user has a household member who
 	// recieves SSI or SSD.
-	
+
 	var sizeDeduct = findSizeDeduct(people);
 
 	var netIncome = income - shelter - utilities - depChildExpenses - 0.2*income - sizeDeduct - medical;
