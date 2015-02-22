@@ -1,77 +1,96 @@
 {
     "region": "Oklahoma",
+    "evaluation_properties":[
+        {
+            "id":"income_deduction_per_expense",
+            "value":""
+        }
+    ],
+    "non_question_responses":[
+        {
+            "name":"unqualified_person",
+            "template_type":"unqualified_person"
+        },
+        {
+            "name":"qualified_person",
+            "template_type":"qualified_person"
+        }
+    ],
     "questions": [
         {
             "name": "US-Citizen",
             "text": "Are you a U.S. Citizen?",
-            "question_type": "YesNo",
-            "question_answer": true,
-            "next_question_pass": "Social-Security-Registration"
+            "template_type": "YesNoButton",
+            "expected_answer": "yes",
+            "next_pass": "Social-Security-Registration",
+            "unexpected_answer_is_failure":true
         },
         {
             "name": "Social-Security-Registration",
             "text": "Do you have a Social Security Number?",
-            "question_type": "YesNo",
-            "question_answer": true,
-            "next_question_pass": "Income"
-        },
-        {
-            "name": "Income",
-            "text": "How much is your monthly household income.",
-            "question_type": "input",
-            "input_type": "number",
-            "next": "DependantCare"
-        },
-        {
-            "name": "DependantCare",
-            "text": "How much do you spend per month on dependance care expenses and child support.",
-            "question_type": "input",
-            "next": "HouseholdResidents"
-        },
-        {
-            "name": "HouseholdResidents",
-            "text": "How many people in your household",
-            "question_type": "input",
-            "next": "Residence"
+            "template_type": "YesNoButton",
+            "expected_answer": "yes",
+            "next_pass": "Residence",
+            "unexpected_answer_is_failure":true
         },
         {
             "name": "Residence",
-            "text": "Do you have a perminant residence",
-            "question_type": "YesNo",
-            "next_question_pass": "Rent/Morgage",
-            "next_question_fail": "SSIS/SSID"
+            "text": "Do you have a permanent home?",
+            "template_type": "YesNoButton",
+            "expected_answer": "yes",
+            "next_pass": "HouseholdResidents",
+            "next_fail": "Income",
+            "unexpected_answer_is_failure":false
         },
         {
-            "name": "Rent/Morgage",
-            "text": "How much do you spend per month for Rent/morgage.",
-            "question_type": "input",
-            "next": "Utilities"
+            "name": "HouseholdResidents",
+            "text": "How many people live in your household?",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "DependantCare"
+        },
+        {
+            "name": "DependantCare",
+            "text": "How much do you spend per month on dependent care expenses and child support.",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "Income"
+        },
+        {
+            "name": "Income",
+            "text": "How much is your gross monthly household income.",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "HasSSDI"
+        },
+        {
+            "name": "HasSSDI",
+            "text": "Do you receive Social Security or Disability Income",
+            "template_type": "YesNoButton",
+            "expected_answer": "yes",
+            "next_pass": "ShelterCost",
+            "unexpected_answer_is_failure":false
+        },
+        {
+            "name": "ShelterCost",
+            "text": "How much do you spend per month for your Rent or Mortgage?",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "Utilities"
         },
         {
             "name": "Utilities",
-            "text": "How much do you spend per month for utilities.",
-            "question_type": "input",
-            "next": "SSIS/SSID"
-        },
-        {
-            "name": "SSIS/SSID",
-            "text": "Do you receive Social Security or Disability Income",
-            "question_type": "YesNo",
-            "next_question_pass": "MedicalExpenses",
-            "next_question_fail": "Applicant-Children"
+            "text": "How much do you spend per month for utilities?",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "MedicalExpenses"
         },
         {
             "name": "MedicalExpenses",
-            "text": "How much are your medical expenses",
-            "question_type": "income",
-            "next": "Applicant-Children"
-        },
-        {
-            "name": "Applicant-Children",
-            "text": "Do you have any children",
-            "question_type": "YesNo",
-            "next_question_pass": "",
-            "next_question_fail": ""
+            "text": "How much are your medical expenses?",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "evaluate_eligibility"
         }
     ]
 }

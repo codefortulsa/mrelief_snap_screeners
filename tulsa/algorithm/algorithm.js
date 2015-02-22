@@ -1,3 +1,20 @@
+var findEligibilityForSNAPWithAnswers = function(answersCollection)
+{
+
+	 var people = answersCollection["HouseholdResidents"];
+	 var depChildExpenses= answersCollection["DependantCare"];
+	 var income = answersCollection["Income"];
+	 var hasSSID = answersCollection["HasSSDI"];
+	 var shelter = answersCollection["ShelterCost"];
+	 var utilities = answersCollection["Utilities"];
+	 var medical = answersCollection["MedicalExpenses"];
+
+
+	return findEligibilityForSNAP(false, people, income, depChildExpenses, shelter, utilities, medical, hasSSID);
+
+}
+
+
 var findEligibilityForSNAP = function (simple, people, income, depChildExpenses, shelter, utilities, medical, hasSSID) {
 	// determine whether the user is eligible for food stamps based on inputs. 
 	// simple is a bollean. true indicates that were are performing the simplified calculation estimated toward the beginning of the survey
