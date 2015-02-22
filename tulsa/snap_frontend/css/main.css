@@ -13,8 +13,8 @@ section {
 	margin-bottom: 50px;
 }
 
-.container {
-	width: 960px;
+#logo {
+	width: auto;
 }
 
 .temp-hidden {

@@ -34,7 +34,8 @@
             "text": "Are you an Oklahoma resident?",
             "template_type": "YesNoButton",
             "expected_answer": true,
-            "next_pass": "Social-Security-Registration"
+            "next_pass": "Social-Security-Registration",
+			"next_fail": "Children"
         },
         {
             "name": "Social-Security-Registration",

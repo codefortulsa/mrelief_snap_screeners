@@ -29,7 +29,7 @@
 		<!-- The following is a link that will be dynamically generated to return to the last section. This should only appear after the first step of eligibility (i.e. Are you a citizen?) -->
 
         <div class="navbar-right temp-hidden" id="back_button_container">
-		<button href="#" id="back_button" class="btn btn-warning navbar-btn" tabindex="0">Oops... Go Back</button>
+		<button href="#" id="back_button" class="btn btn-warning navbar-btn" tabindex="0"><span>Oops...</span>Go Back</button>
         </div>
 
       </div>
@@ -45,11 +45,13 @@
 
           <div class="container">
 
-          	
-            <div class="">
-            	<img src="img/snap_logo.png" />
+       
+            
+            <div class="row">
+            <div class="col-sm-3 col-sm-push-9">
+            	<img src="img/snap_logo.png" id="logo" />
             </div>
-
+            <div class="col-sm-9 col-sm-pull-3">
             <div class="opening-text">
             <h2>Are you eligible for SNAP benefits?</h2>
             <p>We're about to find out.</p>
@@ -58,6 +60,9 @@
             <p>
               <button id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button" tabindex="1">Get Started &raquo;</button>
             </p>
+            
+            </div>
+            </div>
 
             </div>
 
@@ -214,7 +219,7 @@
 
     <footer>
     	<div class="container">
-      	<p>&copy; 2015 &bull; CodeAcrossTulsa</p>
+      	<p>Powered by the CoolKids @CodeForTulsa #CodeAcross</p>
       </div>
     </footer>
     </div> <!-- /container -->
