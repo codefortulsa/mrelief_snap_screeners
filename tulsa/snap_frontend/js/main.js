@@ -203,8 +203,48 @@
         });
     }
 
+    function Sections(options){
+        this.sections = options.sections;
+        this.callbacks = options.callbacks;
+        this.index = 0;
+    }
+
+    Sections.prototype.next_section = function(){
+        var current_section_id = this.sections[this.index];
+        var current_section = $(current_section_id);
+        this.index++;
+        var next_section_id = this.sections[this.index];
+        var next_section = $(next_section_id);
+        current_section.slideUp(500);
+        next_section.slideDown(500);
+        if (typeof this.callbacks[next_section_id] == 'function') {
+           this.callbacks[next_section_id].call(this, current_section, next_section);
+        }
+    };
+
+    Sections.prototype.setup_button_handler = function(){
+        self = this;
+        $(document).on('click', '.next-section', function(e) {
+            e.preventDefault();
+            self.next_section();
+            return false;
+        });
+    };
+
     $(function() {
-        start_questions('tulsa');
+        w.sections = new Sections({
+            "sections": [
+                "#qualify_section",
+                "#initial_information_section",
+                "#question_section",
+            ],
+            "callbacks": {
+                "#question_section": function() {
+                    start_questions('tulsa');
+                }
+            }
+        });
+        w.sections.setup_button_handler();
     });
 
 })(window, jQuery);

@@ -13,9 +13,9 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
+
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -29,7 +29,7 @@
 		<!-- The following is a link that will be dynamically generated to return to the last section. This should only appear after the first step of eligibility (i.e. Are you a citizen?) -->
 
         <div class="navbar-right navbar-back">
-        	<a href="#" id="back_button" class="btn btn-warning navbar-btn">Oops... Go Back</a>
+        	<a href="#" id="back_button" class="btn btn-warning navbar-btn temp-hidden">Oops... Go Back</a>
         </div>
 
       </div>
@@ -47,7 +47,7 @@
             <h2>Are you elibible for SNAP?</h2>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
             <p>
-              <a id="get_started_btn" class="btn btn-primary btn-lg" href="#" role="button">Get Started &raquo;</a>
+              <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Get Started &raquo;</a>
             </p>
           </div>
 
@@ -60,11 +60,13 @@
     ****************************-->
 
     <!--These Sections Represent the Initial Information-->
-    <section id="initial_information_section" class="hide">
+    <section id="initial_information_section" class="temp-hidden">
     	<div class="container">
         <h2>Initial Information</h2>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        </div>
+        <p>
+          <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Continue &raquo;</a>
+        </p>
       </div>
     </section>
 
@@ -75,7 +77,7 @@
     ****************************-->
 
     <!--These Sections Represent the Eligibility Questions-->
-    <section id="question_section" class="hide">
+    <section id="question_section" class="temp-hidden">
     	<div class="container">
         <div class="progress">
           <div id="progress_bar_element" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
@@ -87,10 +89,6 @@
 
         </div>
       </div>
-    </section>
-
-    <section id="">
-
     </section>
 
     <!-- End Eligibility Questions-->
@@ -141,7 +139,7 @@
     ****************************-->
 
     <!--These Sections Represent the Failure Responses-->
-    <section id="fail_section" class="hide">
+    <section id="fail_section" class="temp-hidden">
     	<div class="container">
         <h2>Failure</h2>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
@@ -156,7 +154,7 @@
     ****************************-->
 
     <!--These Sections Represent the Success Section-->
-    <section id="success_section" class="hide">
+    <section id="success_section" class="temp-hidden">
     	<div class="container">
         <h2>Success</h2>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
