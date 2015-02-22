@@ -25,12 +25,12 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Oklahoma SNAP Eligibility</a>
         </div>
-        
+
 		<!-- The following is a link that will be dynamically generated to return to the last section. This should only appear after the first step of eligibility (i.e. Are you a citizen?) -->
-        
+
         <div class="navbar-right navbar-back">
         	<p><a href="#">Oops...Go Back</a></p>
-        </div>   
+        </div>
 
       </div>
     </nav>
@@ -47,7 +47,9 @@
           <div class="container">
             <h2>Are you elibible for SNAP?</h2>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-success btn-lg" href="#" role="button">Get Started &raquo;</a></p>
+            <p>
+              <a id="get_started_btn" class="btn btn-primary btn-lg" href="#" role="button">Get Started &raquo;</a>
+            </p>
           </div>
 
     </section>
@@ -58,25 +60,16 @@
     			INITIAL
     ****************************-->
 
-
     <!--These Sections Represent the Initial Information-->
     <section id="">
     	<div class="container">
-
-            <h2>Initial Information</h2>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-
-
+        <h2>Initial Information</h2>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         </div>
-
-
-
-        </div>
+      </div>
     </section>
 
     <!--End Initial Information Sections-->
-
-
 
     <!--************************
     			ELIGIBILITY
@@ -85,39 +78,53 @@
     <!--These Sections Represent the Eligibility Questions-->
     <section id="">
     	<div class="container">
-
         		<div class="progress">
   <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
     <span class="sr-only">30% Complete</span>
   </div>
 </div>
             <h2>Eligibilty Yes/No <!--Insert The Question Here--></h2>
-            
+
 
 <div class="btn-group btn-group-lg">
   <button type="button" class="btn btn-success">Yes</button>
   <button type="button" class="btn btn-danger">No</button>
-</div>           
+</div>
 
 
         </div>
     </section>
-    
+
     <section id="">
     	<div class="container">
             <h2>Eligibilty Input Boxes <!--Insert The Question Here--></h2>
 <div class="form-group">
   <label for="usr">What is the question?</label>
   <input type="text" class="form-control" id="usr">
-</div>            
+</div>
 
         </div>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+      </div>
     </section>
 
     <!-- End Eligibility Questions-->
 
+<script id="yes_no_input" type="text/underscore_template">
+  <label><%= text %></label>
+  <div class="btn-group">
+    <a href="#" class="btn btn-primary yes-btn action <% if(value===true) { print('active') } %>">Yes</a>
+    <a href="#" class="btn btn-primary no-btn action <% if(value===false) { print('active') } %>">No</a>
+  </div>
+</script>
 
-
+<script id="default_input" type="text/underscore_template">
+<div>
+  <label><%= text %></label>
+  <input type="<%= input_type %>" class="input_value" value="<%= value %>" required >
+  <a href="#" class="btn btn-primary btn-next">Next</a>
+</div>
+</script>
 
     <!--************************
     			FAILURE
@@ -178,6 +185,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/underscore.js"></script>
 
         <script src="js/main.js"></script>
 
