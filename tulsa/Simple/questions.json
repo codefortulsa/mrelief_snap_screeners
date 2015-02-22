@@ -1,76 +1,77 @@
 {
-    "Region": "Oklahoma",
-    "Questions": [
+    "region": "Oklahoma",
+    "questions": [
         {
             "name": "US-Citizen",
-            "Text": "Are you a U.S. Citizen",
-            "QuestionType": "YesNo",
-            "Answer-Yes": "Social-Security-Registration",
-            "Answer-No": "Fail"
+            "text": "Are you a U.S. Citizen?",
+            "question_type": "YesNo",
+            "question_answer": true,
+            "next_question_pass": "Social-Security-Registration"
         },
         {
             "name": "Social-Security-Registration",
-            "Text": "Do you have a Social Security Number?",
-            "QuestionType": "YesNo",
-            "Answer-Yes": "Income",
-            "Answer-No": "Fail"
+            "text": "Do you have a Social Security Number?",
+            "question_type": "YesNo",
+            "question_answer": true,
+            "next_question_pass": "Income"
         },
         {
             "name": "Income",
-            "Text": "How much is your monthly household income.",
-            "QuestionType": "input",
-            "Answer-submit": "DependantCare"
+            "text": "How much is your monthly household income.",
+            "question_type": "input",
+            "input_type": "number",
+            "next": "DependantCare"
         },
         {
             "name": "DependantCare",
-            "Text": "How much do you spend per month on dependance care expenses and child support.",
-            "QuestionType": "input",
-            "Answer-submit": "HouseholdResidents"
+            "text": "How much do you spend per month on dependance care expenses and child support.",
+            "question_type": "input",
+            "next": "HouseholdResidents"
         },
         {
             "name": "HouseholdResidents",
-            "Text": "How many people in your household",
-            "QuestionType": "input",
-            "Answer-submit": "Residence"
+            "text": "How many people in your household",
+            "question_type": "input",
+            "next": "Residence"
         },
         {
             "name": "Residence",
-            "Text": "Do you have a perminant residence",
-            "QuestionType": "YesNo",
-            "Answer-Yes": "Rent/Morgage",
-            "Answer-No": "SSIS/SSID"
+            "text": "Do you have a perminant residence",
+            "question_type": "YesNo",
+            "next_question_pass": "Rent/Morgage",
+            "next_question_fail": "SSIS/SSID"
         },
         {
             "name": "Rent/Morgage",
-            "Text": "How much do you spend per month for Rent/morgage.",
-            "QuestionType": "input",
-            "Answer-submit": "Utilities"
+            "text": "How much do you spend per month for Rent/morgage.",
+            "question_type": "input",
+            "next": "Utilities"
         },
         {
             "name": "Utilities",
-            "Text": "How much do you spend per month for utilities.",
-            "QuestionType": "input",
-            "Answer-submit": "SSIS/SSID"
+            "text": "How much do you spend per month for utilities.",
+            "question_type": "input",
+            "next": "SSIS/SSID"
         },
         {
             "name": "SSIS/SSID",
-            "Text": "Do you receive Social Security or Disability Income",
-            "QuestionType": "YesNo",
-            "Answer-Yes": "MedicalExpenses",
-            "Answer-No": "Applicant-Children"
+            "text": "Do you receive Social Security or Disability Income",
+            "question_type": "YesNo",
+            "next_question_pass": "MedicalExpenses",
+            "next_question_fail": "Applicant-Children"
         },
         {
             "name": "MedicalExpenses",
-            "Text": "How much are your medical expenses",
-            "QuestionType": "income",
-            "Answer-submit": "Applicant-Children"
+            "text": "How much are your medical expenses",
+            "question_type": "income",
+            "next": "Applicant-Children"
         },
         {
             "name": "Applicant-Children",
-            "Text": "Do you have any children",
-            "QuestionType": "YesNo",
-            "Answer-Yes": "",
-            "Answer-No": ""
+            "text": "Do you have any children",
+            "question_type": "YesNo",
+            "next_question_pass": "",
+            "next_question_fail": ""
         }
     ]
 }
