@@ -19,7 +19,7 @@
     "questions": [
         {
             "name": "US-Citizen",
-            "text": "Are you a U.S. Citizen?",
+            "text": "Are you an Oklahoma resident?",
             "template_type": "YesNoButton",
             "expected_answer": "yes",
             "next_pass": "Social-Security-Registration",
@@ -27,67 +27,76 @@
         },
         {
             "name": "Social-Security-Registration",
-            "text": "Do you have a Social Security Number?",
-            "template_type": "YesNoButton",
-            "expected_answer": "yes",
-            "next_pass": "Residence",
-            "unexpected_answer_is_failure":true
-        },
-        {
-            "name": "Residence",
-            "text": "Do you have a permanent home?",
+            "text": "Do you have a Social Security Number, a Green Card or a Visa?",
             "template_type": "YesNoButton",
             "expected_answer": "yes",
             "next_pass": "HouseholdResidents",
-            "next_fail": "Income",
-            "unexpected_answer_is_failure":false
+			"next_fail": "Children",
+            "unexpected_answer_is_failure":true
         },
         {
+            "name": "Children",
+            "text": "Do you have children under 18 who are legal permanent residents of Oklahoma?",
+            "template_type": "YesNoButton",
+            "expected_answer": "yes",
+            "next_pass": "HouseholdResidents",
+            "unexpected_answer_is_failure":true
+        },
+		{
             "name": "HouseholdResidents",
-            "text": "How many people live in your household?",
-            "template_type": "input",
-            "input_type": "number",
-            "next_pass": "DependantCare"
-        },
-        {
-            "name": "DependantCare",
-            "text": "How much do you spend per month on dependent care expenses and child support.",
+            "text": "How many folks live in your household?",
             "template_type": "input",
             "input_type": "number",
             "next_pass": "Income"
         },
-        {
+		{
             "name": "Income",
-            "text": "How much is your gross monthly household income.",
+            "text": "How much money do you bring in each month from any source?",
             "template_type": "input",
             "input_type": "number",
-            "next_pass": "HasSSDI"
+            "next_pass": "DependantCare"
         },
-        {
-            "name": "HasSSDI",
-            "text": "Do you receive Social Security or Disability Income",
+		{
+            "name": "DependantCare",
+            "text": "If you have a child support obligation or any other child care expenses, how much do you pay?",
+            "template_type": "input",
+            "input_type": "number",
+            "next_pass": "Residence"
+        },
+		{
+            "name": "Residence",
+            "text": "Do you have a mailing address?",
             "template_type": "YesNoButton",
             "expected_answer": "yes",
             "next_pass": "ShelterCost",
-            "unexpected_answer_is_failure":false
+            "unexpected_answer_is_failure":true
         },
         {
             "name": "ShelterCost",
-            "text": "How much do you spend per month for your Rent or Mortgage?",
+            "text": "How much is your rent or mortgage? (If homeless, just say 0.)",
             "template_type": "input",
             "input_type": "number",
             "next_pass": "Utilities"
         },
         {
             "name": "Utilities",
-            "text": "How much do you spend per month for utilities?",
+            "text": "How much do you pay for utilities? (If homeless, just say 0.)",
             "template_type": "input",
             "input_type": "number",
-            "next_pass": "MedicalExpenses"
+            "next_pass": "HasSSDI"
         },
-        {
+		{
+            "name": "HasSSDI",
+            "text": "Are you on either SSI or SSD?",
+            "template_type": "YesNoButton",
+            "expected_answer": "yes",
+            "next_pass": "MedicalExpenses",
+			"next_fail": "evaluate_eligibility",
+            "unexpected_answer_is_failure":false
+        },
+		{
             "name": "MedicalExpenses",
-            "text": "How much are your medical expenses?",
+            "text": "What are your  monthly medical expenses?",
             "template_type": "input",
             "input_type": "number",
             "next_pass": "evaluate_eligibility"
