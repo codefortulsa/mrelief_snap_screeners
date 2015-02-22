@@ -29,19 +29,18 @@
 		<!-- The following is a link that will be dynamically generated to return to the last section. This should only appear after the first step of eligibility (i.e. Are you a citizen?) -->
 
         <div class="navbar-right navbar-back">
-        	<p><a href="#">Oops...Go Back</a></p>
+        	<a href="#" id="back_button" class="btn btn-warning navbar-btn">Oops... Go Back</a>
         </div>
 
       </div>
     </nav>
-
 
     <!--************************
     			HOME
     ****************************-->
 
     <!-- Home Section-->
-	<section id="">
+  	<section id="qualify_section">
         <!-- Main jumbotron for a primary marketing message or call to action -->
 
           <div class="container">
@@ -61,7 +60,7 @@
     ****************************-->
 
     <!--These Sections Represent the Initial Information-->
-    <section id="initial_information">
+    <section id="initial_information_section" class="hide">
     	<div class="container">
         <h2>Initial Information</h2>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
@@ -76,7 +75,7 @@
     ****************************-->
 
     <!--These Sections Represent the Eligibility Questions-->
-    <section id="question_section">
+    <section id="question_section" class="hide">
     	<div class="container">
         <div class="progress">
           <div id="progress_bar_element" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
@@ -142,14 +141,11 @@
     ****************************-->
 
     <!--These Sections Represent the Failure Responses-->
-    <section id="">
+    <section id="fail_section" class="hide">
     	<div class="container">
-
-            <h2>Failure</h2>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-
-
-        </div>
+        <h2>Failure</h2>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+      </div>
     </section>
 
     <!-- End Failure Responses-->
@@ -160,37 +156,19 @@
     ****************************-->
 
     <!--These Sections Represent the Success Section-->
-    <section id="">
+    <section id="success_section" class="hide">
     	<div class="container">
-
-            <h2>Success</h2>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-
-
+        <h2>Success</h2>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         </div>
     </section>
     <!-- End Success Section-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <footer>
-      	<div class="container">
-        	<p>&copy; 2015 &bull; CodeAcrossTulsa</p>
-        </div>
-      </footer>
+    <footer>
+    	<div class="container">
+      	<p>&copy; 2015 &bull; CodeAcrossTulsa</p>
+      </div>
+    </footer>
     </div> <!-- /container -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
@@ -198,7 +176,7 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/underscore.js"></script>
 
-        <script src="../algorithm/algorithm.js"></script>
+        <script src="js/algorithm.js"></script>
         <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

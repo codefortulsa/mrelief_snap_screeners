@@ -12,8 +12,7 @@ var findEligibilityForSNAPWithAnswers = function(answersCollection)
 
 	return findEligibilityForSNAP(false, people, income, depChildExpenses, shelter, utilities, medical, hasSSID);
 
-}
-
+};
 
 var findEligibilityForSNAP = function (simple, people, income, depChildExpenses, shelter, utilities, medical, hasSSID) {
 	// determine whether the user is eligible for food stamps based on inputs.
@@ -43,7 +42,7 @@ var findEligibilityForSNAP = function (simple, people, income, depChildExpenses,
 	}
 
 	if (utilities > 345) {
-	//utilties standard deduction of 345
+		//utilties standard deduction of 345
 		utilties = 345;
 	}
 
@@ -88,23 +87,24 @@ var findSizeDeduct = function (people) {
 		sizeDeduct = 221;
 	}
 	return sizeDeduct;
-}
+};
 
 var determineEligibilty = function (income, shelter, utilities, depChildExpenses, people, medical, hasSSID) {
 	// equation to determine eligibility for SNAP. depending on whether the user has a household member who
 	// recieves SSI or SSD.
+	var baseAmount, perPerson;
 
 	var sizeDeduct = findSizeDeduct(people);
 
 	var netIncome = income - shelter - utilities - depChildExpenses - 0.2*income - sizeDeduct - medical;
 
 	if (hasSSID) {
-		var baseAmount = 634;
-		var perPerson = 338.5;
+		baseAmount = 634;
+		perPerson = 338.5;
 	}
 	else {
-		var baseAmount = 825;
-		var perPerson = 440;
+		baseAmount = 825;
+		perPerson = 440;
 	}
 
 	if (netIncome <= (baseAmount + people*perPerson)) {
@@ -114,4 +114,4 @@ var determineEligibilty = function (income, shelter, utilities, depChildExpenses
 		return false;
 	}
 
-}
+};

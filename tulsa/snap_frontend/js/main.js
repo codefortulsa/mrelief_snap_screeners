@@ -1,9 +1,5 @@
 (function(w, $){
 
-    function View(){
-
-    }
-
     var templates = {
         YesNoButton: _.template($('#yes_no_input').html()),
         input: _.template($('#default_input').html()),
@@ -83,8 +79,7 @@
 
     QuestionController.prototype.create_template = function(template_type, context_object){
         var template = templates[template_type];
-        var template_with_context = $(template(context_object));
-        return template_with_context;
+        return $(template(context_object));
     };
 
     QuestionController.prototype.evaluate_eligibility = function()
@@ -101,7 +96,7 @@
         if(this.is_complete || this.failed)
             percentDone = 100;
 
-        $("#progress_bar_element").css('width', percentDone   + '%' );
+        $("#progress_bar_element").css('width', percentDone + '%' );
     };
 
     QuestionController.prototype.configure_template = function(current_component, target_template)
@@ -186,8 +181,6 @@
         });
 
         var template = this.create_template(current.template_type, context);
-        // terrible but wat
-        // handle yes/no actions
         this.configure_template(current, template);
 
         return template;
@@ -195,20 +188,23 @@
 
     QuestionController.prototype.render = function () {
         $(this.options.render_div).html(this.render_current());
-
     };
 
     var region = null;
 
-    $(function() {
-        // Start this up
-        $.getJSON('../configuration/questions.json').done(function(resp) {
+    function start_questions(region){
+        // load and start up questions handler
+        $.getJSON('../configuration/' + region + '_questions.json').done(function(resp) {
             w.questions = new QuestionController(resp.questions, resp.non_question_responses, {});
             w.questions.render();
             region = resp.region;
         }).fail(function(resp, textStatus, error) {
             console.error("failed to get questions JSON" + error);
         });
+    }
+
+    $(function() {
+        start_questions('tulsa');
     });
 
 })(window, jQuery);
