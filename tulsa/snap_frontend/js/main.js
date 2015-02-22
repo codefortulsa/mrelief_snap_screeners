@@ -43,9 +43,8 @@
     QuestionController.prototype.navigate = function (current_question) {
         // get either the next question when succesfully validated
         // or the actual next step
-
+       this.history.push(current_question.name);
        if(!this.is_survey_failed()) {
-           this.history.push(current_question.name);
            next_question_name = current_question.next;
            this.index = this.index_of_question(next_question_name);
        }
@@ -63,14 +62,13 @@
     };
 
     QuestionController.prototype.get_current = function () {
-        /*This section could grow to include other responses or could go away.*/
-        if(this.failed)
-        {
+         // This section could grow to include other responses or could go away.
+        if(this.failed) {
             return _.findWhere(this.non_question_responses, {name: 'unqualified_person'});
         }
-        if(this.is_complete)
+        if(this.is_complete) {
             return _.findWhere(this.non_question_responses, {name: 'qualified_person'});
-
+        }
         return this.questions[this.index];
     };
 
@@ -131,22 +129,27 @@
             case 'YesNoButton':
                 target_template.on('click', '.action', function(e){
                     e.preventDefault();
-                    if(current_component.unexpected_answer_is_failure) {
-                        var correct_answer_button_type = current_component.expected_answer + '-btn';
-                        controller.failed = !$(e.currentTarget).hasClass(correct_answer_button_type);
-                    }
-                    if(current_component.expected_answer == 'yes') {
+                    var answer = $(e.currentTarget).hasClass('yes-btn');
+                    // if next_fail is not available we set failed to true
+
+                    // check if we match the expected answer
+                    if(current_component.expected_answer == answer) {
                         current_component.next = current_component.next_pass;
-                    } else {
+                    // If no next_fail provided assume a total failure
+                    } else if (current_component.next_fail) {
                         current_component.next = current_component.next_fail;
+                    } else {
+                        // If we don't define a next_file we fail the entire process
+                        controller.failed = true;
                     }
 
-                    controller.store_value(current_component.name, !controller.failed);
+                    controller.store_value(current_component.name, answer);
                     controller.process_template(current_component);
 
                     return false;
                 });
                 break;
+
             case 'input':
                 current_component.next = current_component.next_pass;
                 var val = target_template.find('.input_value');
@@ -173,12 +176,14 @@
                     return false;
                 }, 200);
 
+                // Handle pressing enter on input, try submit
                 val.keypress(function(e) {
                     if(e.which == 13) {
                         return submit_field(e);
                     }
                 });
 
+                // Handle clicking next button
                 target_template.on('click', '.btn-next', function(e){
                     return submit_field(e);
                 });
@@ -191,11 +196,15 @@
         var self, current, current_value;
         self = this;
         current = this.get_current();
+        if (!current) {
+            debugger
+        };
         current_value = this.get_value(current.name);
 
         context = _.defaults(current, {
             input_type: 'text',
-            value: current_value
+            value: current_value,
+            number_type: null
         });
 
         var template = this.create_template(current.template_type, context);
@@ -205,7 +214,10 @@
     };
 
     QuestionController.prototype.render = function () {
-        $(this.options.render_div).html(this.render_current());
+        var current = this.render_current();
+        $(this.options.render_div).html(current);
+        // find the input in the potential field and focus it.
+        current.find('input').focus();
     };
 
     var region = null;
