@@ -4,6 +4,9 @@
         YesNoButton: _.template($('#yes_no_input').html()),
         input: _.template($('#default_input').html()),
         unqualified_person: _.template($('#unqualified_person').html()),
+        unqualified_person_citizen: _.template($('#unqualified_person_citizen').html()),
+        unqualified_person_kids_ssn: _.template($('#unqualified_person_kids_ssn').html()),
+        unqualified_person_mailing: _.template($('#unqualified_person_mailing').html()),
         qualified_person: _.template($('#qualified_person').html())
 
     };
@@ -198,7 +201,7 @@
         current = this.get_current();
         if (!current) {
             debugger
-        };
+        }
         current_value = this.get_value(current.name);
 
         context = _.defaults(current, {
