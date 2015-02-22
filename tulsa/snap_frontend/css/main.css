@@ -31,7 +31,22 @@ section {
 	text-decoration: underline;
 }
 
+.opening-logo {
+	width: 425px;
+	height: 225px;
+}
+
+
+
 .temp-hidden {
     /* Less important than bs .hide */
     display: none;
 }
+	text-decoration: { underline;	
+}
+
+
+
+
+
+
