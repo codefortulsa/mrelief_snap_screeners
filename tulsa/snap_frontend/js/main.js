@@ -64,14 +64,7 @@
         }
     };
 
-    QuestionController.prototype.get_current = function () {
-         // This section could grow to include other responses or could go away.
-        if(this.failed) {
-            return _.findWhere(this.non_question_responses, {name: 'unqualified_person'});
-        }
-        if(this.is_complete) {
-            return _.findWhere(this.non_question_responses, {name: 'qualified_person'});
-        }
+    QuestionController.prototype.get_current_question = function () {
         return this.questions[this.index];
     };
 
@@ -89,6 +82,14 @@
     };
 
     QuestionController.prototype.process_template = function(current_question) {
+        next = current_question.next;
+        end_check_found = _.findWhere(this.non_question_responses, {'name': next});
+        // We've at a point where
+        if( next && end_check_found ) {
+            // Evaluate non-question final responses
+            // controller.evaluate_eligibility();
+            debugger
+        }
         this.navigate(current_question);
         this.update_progress();
         this.render();
@@ -102,7 +103,7 @@
     QuestionController.prototype.evaluate_eligibility = function()
     {
         this.is_complete = true;
-        this.failed = !findEligibilityForSNAPWithAnswers(this.answers);
+        failed = !findEligibilityForSNAPWithAnswers(this.answers);
         this.update_progress();
         this.render();
     };
@@ -110,8 +111,9 @@
     QuestionController.prototype.update_progress = function()
     {
         var percentDone = ((this.index) / this.questions_count) * 100;
-        if(this.is_complete || this.failed)
+        if(this.is_complete){
             percentDone = 100;
+        }
 
         $("#progress_bar_element").css('width', percentDone + '%' );
     };
@@ -171,11 +173,7 @@
                         input_value = parseInt(input_value);
                     }
                     controller.store_value(current_component.name, input_value);
-                    if(current_component.next_pass =='evaluate_eligibility') {
-                        controller.evaluate_eligibility();
-                    } else {
-                        controller.process_template(current_component);
-                    }
+                    controller.process_template(current_component);
                     return false;
                 }, 200);
 
@@ -198,10 +196,20 @@
     QuestionController.prototype.render_current = function () {
         var self, current, current_value;
         self = this;
-        current = this.get_current();
+        current = this.get_current_question();
+
         if (!current) {
             debugger
         }
+
+        // This section could grow to include other responses or could go away.
+        // if(this.failed) {
+        //     return _.findWhere(this.non_question_responses, {name: 'unqualified_person'});
+        // }
+        // if(this.is_complete) {
+        //     return _.findWhere(this.non_question_responses, {name: 'qualified_person'});
+        // }
+
         current_value = this.get_value(current.name);
 
         context = _.defaults(current, {
