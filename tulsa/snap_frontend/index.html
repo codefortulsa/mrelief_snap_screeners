@@ -29,7 +29,7 @@
 		<!-- The following is a link that will be dynamically generated to return to the last section. This should only appear after the first step of eligibility (i.e. Are you a citizen?) -->
 
         <div class="navbar-right temp-hidden" id="back_button_container">
-		<a href="#" id="back_button" class="btn btn-warning navbar-btn">Oops... Go Back</a>
+		<button href="#" id="back_button" class="btn btn-warning navbar-btn" tabindex="0"><span>Oops...</span>Go Back</button>
         </div>
 
       </div>
@@ -40,28 +40,33 @@
     ****************************-->
 
     <!-- Home Section-->
-  	<section id="qualify_section">
+    <section id="qualify_section">
         <!-- Main jumbotron for a primary marketing message or call to action -->
 
           <div class="container">
 
-          	<div class="opening-logo">
-            	<img src="img/snap_logo.png" border="0" />
+       
+            
+            <div class="row">
+            <div class="col-sm-3 col-sm-push-9">
+            	<img src="img/snap_logo.png" id="logo" />
             </div>
-
+            <div class="col-sm-9 col-sm-pull-3">
             <div class="opening-text">
             <h2>Are you eligible for SNAP benefits?</h2>
             <p>We're about to find out.</p>
-			<p>Ultimately, your eligibility is up to the Department of Human Services.</p>
-			<p>This app is not officially a part of DHS.</p>
+      			<p>Ultimately, your eligibility is up to the Department of Human Services.</p>
+      			<p>This app is not officially a part of DHS.</p>
             <p>
-              <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Get Started &raquo;</a>
+              <button id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button" tabindex="1">Get Started &raquo;</button>
             </p>
+            
+            </div>
+            </div>
 
             </div>
 
           </div>
-
     </section>
 
     <!--End Home Section-->
@@ -72,17 +77,17 @@
 
     <!--These Sections Represent the Initial Information-->
     <section id="initial_information_section" class="temp-hidden">
-    	<div class="container">
+      <div class="container">
         <h2>What we’re gonna do…</h2>
         <p>In the next few screens we will ask a handful of questions about your income and your expenses. In the end, this will be a good indicator of whether or not you’re eligible for SNAP benefits.</p>
-		<p>However, the ultimate decision is up to DHS.</p>
+        <p>However, the ultimate decision is up to DHS.</p>
         <p>If you need to go back and correct something at any point, click the “OOPS!” button.</p>
         <p>
-          <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Continue &raquo;</a>
+          <button id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button" tabindex="1">Continue &raquo;</button>
         </p>
       </div>
     </section>
-    
+
     <section id="initial_information_section2" class="temp-hidden">
     	<div class="container">
         <h2>What you’re gonna need…</h2>
@@ -90,7 +95,7 @@
         <p>We'll also need to know how much you pay for utilities, rent, child care or any other expenses you might have.</p>
 		<p>So it'd be a good idea to grab whatever paperwork you have on that (bills, lease, pay stubs, etc.).</p>
         <p>
-          <a id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button">Continue &raquo;</a>
+          <button id="get_started_btn" class="btn btn-primary btn-lg next-section" href="#" role="button" tabindex="1">Continue &raquo;</button>
         </p>
       </div>
     </section>
@@ -124,23 +129,55 @@
     ****************************-->
 
 <script id="unqualified_person_citizen" type="text/underscore_template">
-    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time. Citizen.</h2><br />
-    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2>
+    <div class="row">
+      
+	  
+	  <p>We’re sorry, but you are only eligible for SNAP benefits if you are a resident of Oklahoma.</p>
+      <div class="col-sm-6 col-sm-offset-3">
+	    <a class="snap_info_link btn btn-info btn-block btn-lg" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+      </div>
+    </div>
 </script>
 
 <script id="unqualified_person_kids_ssn" type="text/underscore_template">
-    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time. Kids & SSN </h2><br />
-    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2>
+    <div class="row">
+      
+	 <p>You need to have either your own SSN, a green card, an active visa to be eligible or if your kids are legal permanent residents of Oklahoma you could be eligible.</p>
+
+<p>To get a Social Security Number, click the button below:
+
+	  <div class="col-sm-6 col-sm-offset-3">
+        <a class="snap_info_link btn btn-info btn-block btn-lg" href="http://www.socialcardapplication.us/?gclid=CJSM3-6B9MMCFQqFaQodzk8A1w">For more information click here</a>
+      </div>
+    </div>
 </script>
 
 <script id="unqualified_person_mailing" type="text/underscore_template">
-    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time. Mailing Address</h2><br />
-    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2>
+    <div class="row">
+      
+	  	
+	  <p>You need to have a mailing address so that your SNAP card can be mailed to you.</p>
+
+	  <p>If you can find an address to use for your card to be mailed to, please continue the process. You can use a Post Office box, a friend or some charitable organization who would let you use their address.</p>
+	  <div class="col-sm-6 col-sm-offset-3">
+        <a class="snap_info_link btn btn-info btn-block btn-lg" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+      </div>
+    </div>
 </script>
 
 <script id="unqualified_person" type="text/underscore_template">
-    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2><br />
-    <a class="snap_info_link" href="http://www.okdhs.org/programsandservices/snap/">For more information click here</a>
+    <h2 class="unqualified_message_text">You may not qualify for snap benefits at this time.</h2>
+    <div class="row">
+      
+	  <p>Your income is higher than the income cap allows for SNAP benefits.</p>
+
+<p>However, the ultimate decision is up to DHS. If you’d like to contact them, call 1-866-411-1877.</p>
+	  
+      
+    </div>
 </script>
 
 
@@ -164,8 +201,8 @@
     <div class="row">
       <div class="col-xs-8">
         <div class="btn-group btn-group-lg">
-          <a href="#" class="btn btn-primary btn-success yes-btn action <% if(value===true) { print('active') } %>">Yes</a>
-          <a href="#" class="btn btn-primary btn-danger no-btn action <% if(value===false) { print('active') } %>">No</a>
+          <button class="btn btn-primary btn-success yes-btn action <% if(value===true) { print('active') } %>" tabindex="1">Yes</button>
+          <button class="btn btn-primary btn-danger no-btn action <% if(value===false) { print('active') } %>" tabindex="2">No</button>
         </div>
       </div>
     </div>
@@ -179,19 +216,26 @@
       <label for="<%= name %>_label"><%= text %></label><br/>
       <div class="row">
         <div class="col-xs-5">
+          <% if (input_type == 'number' && number_type == 'money') { %>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="<%= input_type %>" class="form-control input_value" value="<%= value %>" required id="<%= name %>_label">
+          </div>
+          <% } else { %>
           <input type="<%= input_type %>" class="form-control input_value" value="<%= value %>" required id="<%= name %>_label">
+          <% } %>
         </div>
       </div>
     </div>
-    <a href="#" class="btn btn-primary btn-next" style="margin-top: 10px">Next</a>
-    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+	<p><a href="#" class="btn btn-primary btn-next" style="margin-top: 10px">Next</a></p>
+    <p>A variable can go here to explain the step.</p>
   </div>
 </script>
 
 
     <footer>
     	<div class="container">
-      	<p>&copy; 2015 &bull; CodeAcrossTulsa</p>
+      	<p>Powered by the CoolKids @CodeForTulsa #CodeAcross</p>
       </div>
     </footer>
     </div> <!-- /container -->

@@ -33,26 +33,24 @@
             "name": "US-Citizen",
             "text": "Are you an Oklahoma resident?",
             "template_type": "YesNoButton",
-            "expected_answer": "yes",
+            "expected_answer": true,
             "next_pass": "Social-Security-Registration",
-            "unexpected_answer_is_failure": true
+			"next_fail": "unqualified_person"
         },
         {
             "name": "Social-Security-Registration",
             "text": "Do you have a Social Security Number, a Green Card or a Visa?",
             "template_type": "YesNoButton",
-            "expected_answer": "yes",
+            "expected_answer": true,
             "next_pass": "HouseholdResidents",
-			"next_fail": "Children",
-            "unexpected_answer_is_failure": true
+			"next_fail": "Children"
         },
         {
             "name": "Children",
             "text": "Do you have children under 18 who are legal permanent residents of Oklahoma?",
             "template_type": "YesNoButton",
-            "expected_answer": "yes",
-            "next_pass": "HouseholdResidents",
-            "unexpected_answer_is_failure": true
+            "expected_answer": true,
+            "next_pass": "HouseholdResidents"
         },
 		{
             "name": "HouseholdResidents",
@@ -66,6 +64,7 @@
             "text": "How much money do you bring in each month from any source?",
             "template_type": "input",
             "input_type": "number",
+            "number_type": "money",
             "next_pass": "DependantCare"
         },
 		{
@@ -73,21 +72,22 @@
             "text": "If you have a child support obligation or any other child care expenses, how much do you pay?",
             "template_type": "input",
             "input_type": "number",
+            "number_type": "money",
             "next_pass": "Residence"
         },
 		{
             "name": "Residence",
             "text": "Do you have a mailing address?",
             "template_type": "YesNoButton",
-            "expected_answer": "yes",
-            "next_pass": "ShelterCost",
-            "unexpected_answer_is_failure":true
+            "expected_answer": true,
+            "next_pass": "ShelterCost"
         },
         {
             "name": "ShelterCost",
             "text": "How much is your rent or mortgage? (If homeless, just say 0.)",
             "template_type": "input",
             "input_type": "number",
+            "number_type": "money",
             "next_pass": "Utilities"
         },
         {
@@ -95,22 +95,23 @@
             "text": "How much do you pay for utilities? (If homeless, just say 0.)",
             "template_type": "input",
             "input_type": "number",
+            "number_type": "money",
             "next_pass": "HasSSDI"
         },
 		{
             "name": "HasSSDI",
             "text": "Are you on either SSI or SSD?",
             "template_type": "YesNoButton",
-            "expected_answer": "yes",
+            "expected_answer": true,
             "next_pass": "MedicalExpenses",
-			"next_fail": "evaluate_eligibility",
-            "unexpected_answer_is_failure":false
+			"next_fail": "evaluate_eligibility"
         },
 		{
             "name": "MedicalExpenses",
             "text": "What are your  monthly medical expenses?",
             "template_type": "input",
             "input_type": "number",
+            "number_type": "money",
             "next_pass": "evaluate_eligibility"
         }
     ]
