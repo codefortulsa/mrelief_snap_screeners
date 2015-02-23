@@ -35,7 +35,7 @@
             "template_type": "YesNoButton",
             "expected_answer": true,
             "next_pass": "Social-Security-Registration",
-			"next_fail": "Children"
+			"next_fail": "unqualified_person"
         },
         {
             "name": "Social-Security-Registration",
